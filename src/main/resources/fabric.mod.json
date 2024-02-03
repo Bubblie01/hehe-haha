@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"io.github.bnnuycorps.oasisbar.TemplateMod"
+			"io.github.bnnuycorps.oasisbar.Main"
 		],
 		"client": [
-			"io.github.bnnuycorps.oasisbar.TemplateModClient"
+			"io.github.bnnuycorps.oasisbar.ClientInitializer"
 		]
 	},
 	"mixins": [
