@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "template-mod",
+	"id": "oasisbar",
 	"version": "${version}",
 	"name": "Template Mod",
 	"description": "This is an example description! Tell everyone what your mod is about!",
@@ -12,20 +12,20 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/template-mod/icon.png",
+	"icon": "assets/oasisbar/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.TemplateMod"
+			"io.github.bnnuycorps.oasisbar.TemplateMod"
 		],
 		"client": [
-			"com.example.TemplateModClient"
+			"io.github.bnnuycorps.oasisbar.TemplateModClient"
 		]
 	},
 	"mixins": [
-		"template-mod.mixins.json",
+		"oasisbar.mixins.json",
 		{
-			"config": "template-mod.client.mixins.json",
+			"config": "oasisbar.client.mixins.json",
 			"environment": "client"
 		}
 	],

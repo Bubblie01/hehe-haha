@@ -1,4 +1,4 @@
-package com.example;
+package io.github.bnnuycorps.oasisbar;
 
 import net.fabricmc.api.ModInitializer;
 
