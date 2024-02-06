@@ -17,8 +17,8 @@ public class ClientInitializer implements ClientModInitializer {
 			scaledHeight = drawContext.getScaledWindowHeight();
 			scaledWidth = drawContext.getScaledWindowWidth();
 			int sprintHeight = scaledHeight - 34 + 2;
-			int sprintWidth = scaledWidth/2 - 100;
-			drawContext.drawTexture(new Identifier(Main.MOD_ID, "textures/gui/hud.png"), sprintWidth, sprintHeight,0,8,256,256);
+			int sprintWidth = scaledWidth/2 - 91;
+			drawContext.drawTexture(new Identifier(Main.MOD_ID, "textures/gui/hud.png"), sprintWidth, sprintHeight,0,35,182,5);
 			client.getProfiler().pop();
 		});
 	}
