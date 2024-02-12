@@ -18,13 +18,13 @@ public class ClientInitializer implements ClientModInitializer {
 			client.getProfiler().push("sprintBar");
 			scaledHeight = drawContext.getScaledWindowHeight();
 			scaledWidth = drawContext.getScaledWindowWidth();
-			int sprintHeight = scaledHeight - 34 + 2;
+			int sprintHeight = scaledHeight - 28 + 2;
 			int sprintWidth = scaledWidth/2 - 91;
-			drawContext.drawTexture(new Identifier(Main.MOD_ID, "textures/gui/icons.png"), sprintWidth, sprintHeight,0,35,182,5);
+			drawContext.drawTexture(new Identifier("textures/gui/icons.png"), sprintWidth, sprintHeight,0,112,182,5);
 			PlayerEntity player = client.player;
 			int k = (int)(((SprintManager)player).oasisbar$getSprintLevel() * 10.1f);
 			if(k > 0) {
-				drawContext.drawTexture(new Identifier(Main.MOD_ID, "textures/gui/icons.png"), sprintWidth, sprintHeight,0,41,k,5);
+				drawContext.drawTexture(new Identifier("textures/gui/icons.png"), sprintWidth, sprintHeight+1,0,117,k,5);
 			}
 			client.getProfiler().pop();
 		});
