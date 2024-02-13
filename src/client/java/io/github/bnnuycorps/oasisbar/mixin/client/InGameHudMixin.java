@@ -1,4 +1,4 @@
-package io.github.bnnuycorps.oasisbar.mixin;
+package io.github.bnnuycorps.oasisbar.mixin.client;
 
 import io.github.bnnuycorps.oasisbar.Thirst.ThirstHudRender;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.GUI;

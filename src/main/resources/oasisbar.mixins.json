@@ -17,7 +17,7 @@
 		"GlassBottleItemMixin",
 		"SprintPlayerEntityMixin",
 		"ClientPlayerEntityMixin",
-		"InGameHudMixin"
+      "client.InGameHudMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
