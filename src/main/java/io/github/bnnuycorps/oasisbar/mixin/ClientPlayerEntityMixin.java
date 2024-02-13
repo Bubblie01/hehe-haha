@@ -1,6 +1,7 @@
 package io.github.bnnuycorps.oasisbar.mixin;
 
 import com.mojang.authlib.GameProfile;
+import io.github.bnnuycorps.oasisbar.Thirst.ThirstManager;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -22,7 +23,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 
     @Inject(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;setSprinting(Z)V", shift = At.Shift.AFTER))
     public void tickMovementMixin(CallbackInfo info) {
-        net.dehydration.thirst.ThirstManager thirstManager = ((ThirstManagerInt) this).getThirstManager();
+        ThirstManager thirstManager = ((ThirstManagerInt) this).getThirstManager();
         if (thirstManager.hasThirst() && !this.isCreative() && thirstManager.getThirstLevel() < 6) {
             this.setSprinting(false);
         }

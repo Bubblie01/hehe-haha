@@ -1,6 +1,7 @@
 package io.github.bnnuycorps.oasisbar.Thirst.items;
 
 
+import io.github.bnnuycorps.oasisbar.Thirst.ThirstManager;
 import io.github.bnnuycorps.oasisbar.Thirst.inits.ConfigInit;
 import io.github.bnnuycorps.oasisbar.Thirst.inits.EffectInit;
 import io.github.bnnuycorps.oasisbar.Thirst.inits.SoundInit;
@@ -9,7 +10,6 @@ import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstTooltipData;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.client.item.TooltipContext;
@@ -158,7 +158,7 @@ public class Canteen extends Item {
                         stack.setNbt(tags);
                     }
                     tags.putInt("leather_flask", tags.getInt("leather_flask") - 1);
-                    net.dehydration.thirst.ThirstManager thirstManager = ((ThirstManagerInt) playerEntity).getThirstManager();
+                    ThirstManager thirstManager = ((ThirstManagerInt) playerEntity).getThirstManager();
                     thirstManager.add(ConfigInit.CONFIG.flask_thirst_quench);
                     if (!world.isClient)
                         if (tags.getInt("purified_water") == 2 && world.random.nextFloat() <= ConfigInit.CONFIG.flask_dirty_thirst_chance)

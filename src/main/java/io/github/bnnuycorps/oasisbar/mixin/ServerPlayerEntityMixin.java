@@ -2,6 +2,7 @@ package io.github.bnnuycorps.oasisbar.mixin;
 
 import com.mojang.authlib.GameProfile;
 
+import io.github.bnnuycorps.oasisbar.Thirst.ThirstManager;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ServerPlayerInt;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
 import io.github.bnnuycorps.oasisbar.Thirst.packets.ThirstServerPacket;
@@ -14,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import org.spongepowered.asm.mixin.injection.At;
 
-import net.dehydration.thirst.ThirstManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;

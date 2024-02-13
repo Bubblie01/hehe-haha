@@ -1,26 +1,21 @@
 package io.github.bnnuycorps.oasisbar.Thirst.inits;
 
+import io.github.bnnuycorps.oasisbar.Thirst.ThirstManager;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.PlayerInt;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ServerPlayerInt;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
-import net.dehydration.thirst.ThirstManager;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.BinomialLootNumberProvider;
-import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;

@@ -1,15 +1,17 @@
-package io.github.bnnuycorps.oasisbar.Thirst.packets;
+package io.github.bnnuycorps.oasisbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.github.bnnuycorps.oasisbar.Main;
+import io.github.bnnuycorps.oasisbar.Thirst.ThirstManager;
 import io.github.bnnuycorps.oasisbar.Thirst.event.HydrationTemplate;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
+import io.github.bnnuycorps.oasisbar.Thirst.packets.ThirstServerPacket;
 import it.unimi.dsi.fastutil.ints.IntList;
-import net.dehydration.thirst.ThirstManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -33,7 +35,7 @@ public class ThirstClientPacket {
         ClientPlayNetworking.registerGlobalReceiver(ThirstServerPacket.EXCLUDED_SYNC, (client, handler, buffer, responseSender) -> {
             boolean setThirst = buffer.readBoolean();
             client.execute(() -> {
-                ((ThirstManagerAccess) client.player).getThirstManager().setThirst(setThirst);
+                ((ThirstManagerInt) client.player).getThirstManager().setThirst(setThirst);
             });
         });
         ClientPlayNetworking.registerGlobalReceiver(ThirstServerPacket.HYDRATION_TEMPLATE_SYNC, (client, handler, buffer, responseSender) -> {

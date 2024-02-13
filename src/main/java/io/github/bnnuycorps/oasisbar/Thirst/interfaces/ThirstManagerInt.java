@@ -1,6 +1,8 @@
 package io.github.bnnuycorps.oasisbar.Thirst.interfaces;
 
 
+import io.github.bnnuycorps.oasisbar.Thirst.ThirstManager;
+
 public interface ThirstManagerInt {
-    public net.dehydration.thirst.ThirstManager getThirstManager();
+    ThirstManager getThirstManager();
 }

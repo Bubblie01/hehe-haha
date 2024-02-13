@@ -3,6 +3,7 @@ package io.github.bnnuycorps.oasisbar.mixin;
 import java.util.Optional;
 
 import io.github.bnnuycorps.oasisbar.Main;
+import io.github.bnnuycorps.oasisbar.Thirst.ThirstManager;
 import io.github.bnnuycorps.oasisbar.Thirst.inits.ConfigInit;
 import io.github.bnnuycorps.oasisbar.Thirst.inits.EffectInit;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
@@ -12,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.At;
 
-import net.dehydration.thirst.ThirstManager;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
