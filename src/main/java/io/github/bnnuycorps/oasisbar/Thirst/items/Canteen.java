@@ -2,12 +2,15 @@ package io.github.bnnuycorps.oasisbar.Thirst.items;
 
 
 import io.github.bnnuycorps.oasisbar.Thirst.inits.ConfigInit;
+import io.github.bnnuycorps.oasisbar.Thirst.inits.EffectInit;
 import io.github.bnnuycorps.oasisbar.Thirst.inits.SoundInit;
+import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstTooltipData;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.item.TooltipData;
@@ -21,6 +24,7 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -68,7 +72,7 @@ public class Canteen extends Item {
                                 player.getWorld().emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
                             }
                         }
-                        player.getWorld().playSound((PlayerEntity) null, pos, SoundInit.EMPTY_CANTEEN_EVENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                        player.getWorld().playSound((PlayerEntity) null, pos, SoundInit.EMPTY_FLASK_EVENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                         player.incrementStat(Stats.USE_CAULDRON);
 
                         if (itemStack.hasNbt())
@@ -84,7 +88,7 @@ public class Canteen extends Item {
             } else if (state.getBlock() instanceof LeveledCauldronBlock && state.get(LeveledCauldronBlock.LEVEL) > 0 && itemStack.hasNbt() && tags.getInt("canteen") < 2 + this.addition) {
                 // Fill up flask
                 if (!player.getWorld().isClient()) {
-                    player.getWorld().playSound((PlayerEntity) null, pos, SoundInit.FILL_CANTEEN_EVENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    player.getWorld().playSound((PlayerEntity) null, pos, SoundInit.FILL_FLASK_EVENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     player.incrementStat(Stats.USE_CAULDRON);
                     LeveledCauldronBlock.decrementFluidLevel(state, player.getWorld(), pos);
                     tags.putInt("canteen", tags.getInt("canteen") + 1);
@@ -123,7 +127,7 @@ public class Canteen extends Item {
                 if (riverWater && (isEmpty || (!isEmpty && !isDirtyWater)))
                     waterPurity = 0;
 
-                world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundInit.FILL_CANTEEN_EVENT, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+                world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundInit.FILL_FLASK_EVENT, SoundCategory.NEUTRAL, 1.0F, 1.0F);
                 tags.putInt("purified_water", waterPurity);
                 tags.putInt("leather_flask", fillLevel);
                 return TypedActionResult.consume(itemStack);
@@ -154,13 +158,13 @@ public class Canteen extends Item {
                         stack.setNbt(tags);
                     }
                     tags.putInt("leather_flask", tags.getInt("leather_flask") - 1);
-                    ThirstManager thirstManager = ((ThirstManagerAccess) playerEntity).getThirstManager();
+                    net.dehydration.thirst.ThirstManager thirstManager = ((ThirstManagerInt) playerEntity).getThirstManager();
                     thirstManager.add(ConfigInit.CONFIG.flask_thirst_quench);
                     if (!world.isClient)
                         if (tags.getInt("purified_water") == 2 && world.random.nextFloat() <= ConfigInit.CONFIG.flask_dirty_thirst_chance)
-                            playerEntity.addStatusEffect(new StatusEffectInstance(EffectInit.THIRST, ConfigInit.CONFIG.flask_dirty_thirst_duration, 1, false, false, true));
+                            playerEntity.addStatusEffect(new StatusEffectInstance(EffectInit.DEHYDRATION, ConfigInit.CONFIG.flask_dirty_thirst_duration, 1, false, false, true));
                         else if (tags.getInt("purified_water") == 1 && world.random.nextFloat() <= ConfigInit.CONFIG.flask_dirty_thirst_chance * 0.5F)
-                            playerEntity.addStatusEffect(new StatusEffectInstance(EffectInit.THIRST, ConfigInit.CONFIG.flask_dirty_thirst_duration, 0, false, false, true));
+                            playerEntity.addStatusEffect(new StatusEffectInstance(EffectInit.DEHYDRATION, ConfigInit.CONFIG.flask_dirty_thirst_duration, 0, false, false, true));
                 }
             }
         }

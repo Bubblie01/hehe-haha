@@ -3,7 +3,10 @@ package io.github.bnnuycorps.oasisbar.mixin;
 import java.util.Optional;
 
 import io.github.bnnuycorps.oasisbar.Main;
+import io.github.bnnuycorps.oasisbar.Thirst.inits.ConfigInit;
+import io.github.bnnuycorps.oasisbar.Thirst.inits.EffectInit;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
+import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstTooltipData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -42,7 +45,7 @@ public abstract class MilkBucketItemMixin extends Item {
             ((ThirstManagerInt) player).getThirstManager().add(thirstQuench);
 
             if (!world.isClient() && world.random.nextFloat() >= ConfigInit.CONFIG.milk_thirst_chance) {
-                player.addStatusEffect(new StatusEffectInstance(EffectInit.THIRST, ConfigInit.CONFIG.potion_bad_thirst_duration / 2, 0, false, false, true));
+                player.addStatusEffect(new StatusEffectInstance(EffectInit.DEHYDRATION, ConfigInit.CONFIG.potion_bad_thirst_duration / 2, 0, false, false, true));
             }
         }
     }

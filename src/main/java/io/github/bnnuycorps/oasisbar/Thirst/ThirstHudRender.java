@@ -24,7 +24,7 @@ public class ThirstHudRender {
     public static void renderThirstHud(DrawContext context, MinecraftClient client, PlayerEntity playerEntity, int scaledWidth, int scaledHeight, int ticks, int vehicleHeartCount, float flashAlpha,
             float otherFlashAlpha) {
         if (playerEntity != null && !playerEntity.isInvulnerable()) {
-            net.dehydration.thirst.ThirstManager thirstManager = ((ThirstManagerInt) playerEntity).getThirstManager();
+            ThirstManager thirstManager = ((ThirstManagerInt) playerEntity).getThirstManager();
             if (thirstManager.hasThirst()) {
                 int thirst = thirstManager.getThirstLevel();
                 int variable_one;

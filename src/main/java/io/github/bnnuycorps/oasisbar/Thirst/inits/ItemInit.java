@@ -5,18 +5,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.dehydration.item.HandbookItem;
-import net.dehydration.item.LeatherFlask;
-import net.dehydration.item.PurifiedBucket;
-import net.dehydration.item.WaterBowlItem;
+import io.github.bnnuycorps.oasisbar.Thirst.items.Canteen;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potion;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -32,7 +26,7 @@ public class ItemInit {
 
     // Flasks
     public static final List<Item> FLASK_ITEM_LIST = new ArrayList<Item>();
-    public static final Item LEATHER_FLASK = register("leather_flask", new LeatherFlask(0, new Item.Settings().maxCount(1)));
+    public static final Item LEATHER_FLASK = register("leather_flask", new Canteen(0, new Item.Settings().maxCount(1)));
 
     // Handbook
 

@@ -1,4 +1,4 @@
-package net.dehydration.thirst;
+package io.github.bnnuycorps.oasisbar.Thirst;
 
 import io.github.bnnuycorps.oasisbar.Thirst.inits.ConfigInit;
 import net.minecraft.entity.Entity;

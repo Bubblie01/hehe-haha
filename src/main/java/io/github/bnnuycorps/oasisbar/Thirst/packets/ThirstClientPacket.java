@@ -3,14 +3,13 @@ package io.github.bnnuycorps.oasisbar.Thirst.packets;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.bnnuycorps.oasisbar.Main;
+import io.github.bnnuycorps.oasisbar.Thirst.event.HydrationTemplate;
+import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
 import it.unimi.dsi.fastutil.ints.IntList;
-import net.dehydration.DehydrationMain;
-import net.dehydration.access.ThirstManagerAccess;
-import net.dehydration.api.HydrationTemplate;
 import net.dehydration.thirst.ThirstManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -26,7 +25,7 @@ public class ThirstClientPacket {
             client.execute(() -> {
                 if (client.player.getWorld().getEntityById(entityId) != null) {
                     PlayerEntity player = (PlayerEntity) client.player.getWorld().getEntityById(entityId);
-                    ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
+                    ThirstManager thirstManager = ((ThirstManagerInt) player).getThirstManager();
                     thirstManager.setThirstLevel(thirstLevel);
                 }
             });
@@ -48,8 +47,8 @@ public class ThirstClientPacket {
                 hydrationTemplates.add(new HydrationTemplate(intList.getInt(i), items));
             }
             client.execute(() -> {
-                DehydrationMain.HYDRATION_TEMPLATES.clear();
-                DehydrationMain.HYDRATION_TEMPLATES.addAll(hydrationTemplates);
+                Main.HYDRATION_TEMPLATES.clear();
+                Main.HYDRATION_TEMPLATES.addAll(hydrationTemplates);
             });
         });
     }

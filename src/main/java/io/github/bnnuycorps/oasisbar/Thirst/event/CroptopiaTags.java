@@ -1,10 +1,10 @@
 package io.github.bnnuycorps.oasisbar.Thirst.event;
 
 import io.github.bnnuycorps.oasisbar.Main;
+import io.github.bnnuycorps.oasisbar.Thirst.ThirstManager;
 import io.github.bnnuycorps.oasisbar.Thirst.inits.ConfigInit;
 import io.github.bnnuycorps.oasisbar.Thirst.inits.TagInit;
 import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
-import net.dehydration.thirst.ThirstManager;
 
 public class CroptopiaTags {
 
