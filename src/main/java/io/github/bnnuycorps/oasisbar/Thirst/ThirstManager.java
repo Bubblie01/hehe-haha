@@ -1,131 +1,104 @@
 package io.github.bnnuycorps.oasisbar.Thirst;
 
-import io.github.bnnuycorps.oasisbar.Thirst.DrinkComponent;
-import io.github.bnnuycorps.oasisbar.Thirst.Item;
+import io.github.bnnuycorps.oasisbar.Thirst.inits.ConfigInit;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.GameRules;
 
 public class ThirstManager {
-    public int waterLevel = 20;
-    public float watersaturationLevel = 5.0F;
-    public float exhaustion;
-    public int waterTickTimer;
-    public int prevWaterLevel = 20;
 
-    public ThirstManager() {
-    }
+    // Damage Type
+    public static final RegistryKey<DamageType> THIRST = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("dehydration", "thirst"));
 
-    public void add(int water, float saturationModifier) {
-        this.waterLevel = Math.min(water + this.waterLevel, 20);
-        this.watersaturationLevel = Math.min(this.watersaturationLevel + (float) water * saturationModifier * 2.0F, (float) this.waterLevel);
-    }
+    public float dehydration;
+    private boolean hasThirst = true;
+    private int dehydrationTimer;
+    private int thirstLevel = 20;
 
-    public void drink(Item item, ItemStack stack) {
-        if (item.isDrink()) {
-            DrinkComponent drinkComponent = item.getDrinkComponent();
-            this.add(drinkComponent.getThirst(), drinkComponent.getWaterSaturationModifier());
-        }
-
+    public void add(int thirst) {
+        this.thirstLevel = Math.min(thirst + this.thirstLevel, 20);
     }
 
     public void update(PlayerEntity player) {
         Difficulty difficulty = player.getWorld().getDifficulty();
-        this.prevWaterLevel = this.waterLevel;
-        if (this.exhaustion > 4.0F) {
-            this.exhaustion -= 4.0F;
-            if (this.watersaturationLevel > 0.0F) {
-                this.watersaturationLevel = Math.max(this.watersaturationLevel - 1.0F, 0.0F);
-            } else if (difficulty != Difficulty.PEACEFUL) {
-                this.waterLevel = Math.max(this.waterLevel - 1, 0);
+        if (this.dehydration > 4.0F) {
+            this.dehydration -= 4.0F;
+            if (difficulty != Difficulty.PEACEFUL) {
+                this.thirstLevel = Math.max(this.thirstLevel - 1, 0);
             }
         }
-
-        boolean bl = player.getWorld().getGameRules().getBoolean(GameRules.NATURAL_REGENERATION);
-        if (bl && this.watersaturationLevel > 0.0F && player.canFoodHeal() && this.waterLevel >= 20) {
-            ++this.waterTickTimer;
-            if (this.waterTickTimer >= 10) {
-                float f = Math.min(this.watersaturationLevel, 6.0F);
-                player.heal(f / 6.0F);
-                this.addExhaustion(f);
-                this.waterTickTimer = 0;
-            }
-        } else if (bl && this.waterLevel >= 18 && player.canFoodHeal()) {
-            ++this.waterTickTimer;
-            if (this.waterTickTimer >= 80) {
-                player.heal(1.0F);
-                this.addExhaustion(6.0F);
-                this.waterTickTimer = 0;
-            }
-        } else if (this.waterLevel <= 0) {
-            ++this.waterTickTimer;
-            if (this.waterTickTimer >= 80) {
-                if (player.getHealth() > 10.0F || difficulty == Difficulty.HARD || player.getHealth() > 1.0F && difficulty == Difficulty.NORMAL) {
-                    player.damage(player.getDamageSources().starve(), 1.0F);
+        if (this.thirstLevel <= 0) {
+            ++this.dehydrationTimer;
+            if (this.dehydrationTimer >= 90) {
+                if (player.getHealth() > 10.0F || difficulty == Difficulty.HARD || (player.getHealth() > 1.0F && difficulty == Difficulty.NORMAL)) {
+                    player.damage(createDamageSource(player), ConfigInit.CONFIG.thirst_damage);
                 }
-
-                this.waterTickTimer = 0;
+                this.dehydrationTimer = 0;
             }
         } else {
-            this.waterTickTimer = 0;
+            this.dehydrationTimer = 0;
+        }
+        if (!player.isCreative() && ConfigInit.CONFIG.special_effects) {
+            if (thirstLevel == 2 && !player.hasStatusEffect(StatusEffects.HASTE)) {
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 409, 0, false, false, false));
+            }
+            if (thirstLevel == 0 && player.getHungerManager().getFoodLevel() == 0 && !player.hasStatusEffect(StatusEffects.MINING_FATIGUE)) {
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 409, 2, false, false, false));
+            }
         }
 
     }
 
-    public void readNbt(NbtCompound nbt) {
-        if (nbt.contains("waterLevel", 99)) {
-            this.waterLevel = nbt.getInt("waterLevel");
-            this.waterTickTimer = nbt.getInt("waterTickTimer");
-            this.watersaturationLevel = nbt.getFloat("waterSaturationLevel");
-            this.exhaustion = nbt.getFloat("waterExhaustionLevel");
+    public void readNbt(NbtCompound tag) {
+        if (tag.contains("ThirstLevel", 99)) {
+            this.thirstLevel = tag.getInt("ThirstLevel");
+            this.dehydrationTimer = tag.getInt("ThirstTickTimer");
+            this.dehydration = tag.getFloat("ThirstExhaustionLevel");
+            this.hasThirst = tag.getBoolean("HasThirst");
         }
-
     }
 
-    public void writeNbt(NbtCompound nbt) {
-        nbt.putInt("waterLevel", this.waterLevel);
-        nbt.putInt("waterTickTimer", this.waterTickTimer);
-        nbt.putFloat("waterSaturationLevel", this.watersaturationLevel);
-        nbt.putFloat("waterExhaustionLevel", this.exhaustion);
+    public void writeNbt(NbtCompound tag) {
+        tag.putInt("ThirstLevel", this.thirstLevel);
+        tag.putInt("ThirstTickTimer", this.dehydrationTimer);
+        tag.putFloat("ThirstExhaustionLevel", this.dehydration);
+        tag.putBoolean("HasThirst", this.hasThirst);
     }
 
-    public int getWaterLevel() {
-        return this.waterLevel;
-    }
-
-    public int getPrevWaterLevel() {
-        return this.prevWaterLevel;
+    public int getThirstLevel() {
+        return this.thirstLevel;
     }
 
     public boolean isNotFull() {
-        return this.waterLevel < 20;
+        return this.thirstLevel < 20;
     }
 
-    public void addExhaustion(float exhaustion) {
-        this.exhaustion = Math.min(this.exhaustion + exhaustion, 40.0F);
+    public void addDehydration(float dehydration) {
+        this.dehydration = Math.min(this.dehydration + dehydration, 40.0F);
     }
 
-    public float getExhaustion() {
-        return this.exhaustion;
+    public void setThirstLevel(int thirstLevel) {
+        this.thirstLevel = thirstLevel;
     }
 
-    public float getWatersaturationLevel() {
-        return this.watersaturationLevel;
+    public boolean hasThirst() {
+        return this.hasThirst;
     }
 
-    public void setWaterLevel(int waterLevel) {
-        this.waterLevel = waterLevel;
+    public void setThirst(boolean canHaveThirst) {
+        this.hasThirst = canHaveThirst;
     }
 
-    public void setWatersaturationLevel(float watersaturationLevel) {
-        this.watersaturationLevel = watersaturationLevel;
-    }
-
-    public void setExhaustion(float exhaustion) {
-        this.exhaustion = exhaustion;
+    private DamageSource createDamageSource(Entity entity) {
+        return entity.getDamageSources().create(THIRST, null);
     }
 
 }
-

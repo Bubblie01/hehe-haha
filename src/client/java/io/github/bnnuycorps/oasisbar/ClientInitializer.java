@@ -1,10 +1,10 @@
 package io.github.bnnuycorps.oasisbar;
 
+import io.github.bnnuycorps.oasisbar.Thirst.inits.ModelProviderInit;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class ClientInitializer implements ClientModInitializer {
@@ -28,5 +28,8 @@ public class ClientInitializer implements ClientModInitializer {
 			}
 			client.getProfiler().pop();
 		});
+
+		ModelProviderInit.init();
+		ThirstClientPacket.init();
 	}
 }
