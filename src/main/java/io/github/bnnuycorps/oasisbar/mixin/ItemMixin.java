@@ -1,11 +1,11 @@
 package io.github.bnnuycorps.oasisbar.mixin;
 
-import net.its0v3r.ItsThirstMain;
-import net.its0v3r.itsthirst.access.ItemMaxCount;
-import net.its0v3r.itsthirst.access.ThirstManagerAccess;
-import net.its0v3r.itsthirst.registry.ConfigRegistry;
-import net.its0v3r.itsthirst.registry.TagRegistry;
-import net.its0v3r.itsthirst.thirst.ThirstManager;
+
+import io.github.bnnuycorps.oasisbar.thirst.ThirstManager;
+import io.github.bnnuycorps.oasisbar.thirst.access.ItemMaxCount;
+import io.github.bnnuycorps.oasisbar.thirst.access.ThirstManagerAccess;
+import io.github.bnnuycorps.oasisbar.thirst.registry.ConfigRegistry;
+import io.github.bnnuycorps.oasisbar.thirst.registry.TagRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

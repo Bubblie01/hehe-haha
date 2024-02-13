@@ -1,8 +1,8 @@
 package io.github.bnnuycorps.oasisbar.mixin;
 
+import io.github.bnnuycorps.oasisbar.thirst.gui.ThirstHud;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.its0v3r.itsthirst.gui.ThirstHud;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;

@@ -1,13 +1,14 @@
 package io.github.bnnuycorps.oasisbar.mixin;
 
 import com.mojang.authlib.GameProfile;
+import io.github.bnnuycorps.oasisbar.thirst.ThirstManager;
+import io.github.bnnuycorps.oasisbar.thirst.access.ServerPlayerAccess;
+import io.github.bnnuycorps.oasisbar.thirst.access.ThirstManagerAccess;
+import io.github.bnnuycorps.oasisbar.thirst.identifier.NetworkPacketsIdentifiers;
+import io.github.bnnuycorps.oasisbar.thirst.network.utils.defaultBuffers;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.its0v3r.itsthirst.access.ServerPlayerAccess;
-import net.its0v3r.itsthirst.access.ThirstManagerAccess;
-import net.its0v3r.itsthirst.identifier.NetworkPacketsIdentifiers;
-import net.its0v3r.itsthirst.network.utils.defaultBuffers;
-import net.its0v3r.itsthirst.thirst.ThirstManager;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;

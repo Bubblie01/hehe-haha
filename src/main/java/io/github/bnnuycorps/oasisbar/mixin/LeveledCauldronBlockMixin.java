@@ -1,6 +1,7 @@
 package io.github.bnnuycorps.oasisbar.mixin;
 
-import net.its0v3r.itsthirst.access.LeveledCauldronBlockMixinAccess;
+
+import io.github.bnnuycorps.oasisbar.thirst.access.LeveledCauldronBlockMixinAccess;
 import net.minecraft.block.*;
 
 import net.minecraft.block.cauldron.CauldronBehavior;

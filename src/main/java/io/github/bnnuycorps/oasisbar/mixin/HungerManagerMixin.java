@@ -1,13 +1,14 @@
 package io.github.bnnuycorps.oasisbar.mixin;
 
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
-import net.its0v3r.itsthirst.access.ThirstManagerAccess;
-import net.its0v3r.itsthirst.registry.ConfigRegistry;
-import net.its0v3r.itsthirst.thirst.ThirstManager;
+
+import io.github.bnnuycorps.oasisbar.thirst.ThirstManager;
+import io.github.bnnuycorps.oasisbar.thirst.access.ThirstManagerAccess;
+import io.github.bnnuycorps.oasisbar.thirst.registry.ConfigRegistry;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(HungerManager.class)

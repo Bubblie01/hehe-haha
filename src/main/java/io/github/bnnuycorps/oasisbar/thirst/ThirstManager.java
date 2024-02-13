@@ -1,7 +1,6 @@
 package io.github.bnnuycorps.oasisbar.thirst;
 
 import io.github.bnnuycorps.oasisbar.thirst.registry.ConfigRegistry;
-import io.github.bnnuycorps.oasisbar.thirst.registry.DamageSourceRegistry;
 import io.github.bnnuycorps.oasisbar.thirst.registry.SoundRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;

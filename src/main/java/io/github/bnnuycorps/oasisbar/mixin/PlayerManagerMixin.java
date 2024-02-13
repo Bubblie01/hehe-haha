@@ -1,13 +1,12 @@
 package io.github.bnnuycorps.oasisbar.mixin;
 
 
+import io.github.bnnuycorps.oasisbar.thirst.access.ItemMaxCount;
+import io.github.bnnuycorps.oasisbar.thirst.access.ThirstManagerAccess;
+import io.github.bnnuycorps.oasisbar.thirst.identifier.NetworkPacketsIdentifiers;
+import io.github.bnnuycorps.oasisbar.thirst.network.utils.defaultBuffers;
+import io.github.bnnuycorps.oasisbar.thirst.registry.ConfigRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.its0v3r.itsthirst.access.ItemMaxCount;
-import net.its0v3r.itsthirst.access.ThirstManagerAccess;
-import net.its0v3r.itsthirst.identifier.NetworkPacketsIdentifiers;
-import net.its0v3r.itsthirst.network.utils.defaultBuffers;
-import net.its0v3r.itsthirst.registry.ConfigRegistry;
-import net.its0v3r.itsthirst.thirst.ThirstManager;
 import net.minecraft.item.Items;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.PacketByteBuf;

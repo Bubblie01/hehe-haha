@@ -1,11 +1,10 @@
 package io.github.bnnuycorps.oasisbar.mixin;
 
 import io.github.bnnuycorps.oasisbar.thirst.ThirstManager;
-import net.its0v3r.ItsThirstMain;
-import net.its0v3r.itsthirst.access.ThirstManagerAccess;
-import net.its0v3r.itsthirst.registry.ConfigRegistry;
-import net.its0v3r.itsthirst.registry.TagRegistry;
-import net.its0v3r.itsthirst.thirst.ThirstManager;
+
+import io.github.bnnuycorps.oasisbar.thirst.access.ThirstManagerAccess;
+import io.github.bnnuycorps.oasisbar.thirst.registry.ConfigRegistry;
+import io.github.bnnuycorps.oasisbar.thirst.registry.TagRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -46,9 +45,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements ThirstMa
         this.thirstManager.update(player);
 
         // Change hot biome ticks value
-        if (!this.thirstManager.isBiomeTicksAtMaxValue() && player.world.getBiome(player.getBlockPos()).isIn(TagRegistry.HOT_BIOME)) {
+        if (!this.thirstManager.isBiomeTicksAtMaxValue() && player.getWorld().getBiome(player.getBlockPos()).isIn(TagRegistry.HOT_BIOME)) {
             this.thirstManager.biomeTicks++;
-        } else if (!player.world.getBiome(player.getBlockPos()).isIn(TagRegistry.HOT_BIOME)) {
+        } else if (!player.getWorld().getBiome(player.getBlockPos()).isIn(TagRegistry.HOT_BIOME)) {
             if (this.thirstManager.biomeTicks > 0) {
                 this.thirstManager.biomeTicks--;
             }
@@ -60,7 +59,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements ThirstMa
     @Inject(method = "tickMovement()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;updateItems()V", shift = At.Shift.BEFORE))
     private void vanillaThirst$autoRegenThirstIfPeaceful(CallbackInfo info) {
         // Regenerate hearts if on peaceful and natural regenration is turned on
-        if (this.world.getDifficulty() == Difficulty.PEACEFUL && this.world.getGameRules().getBoolean(GameRules.NATURAL_REGENERATION)) {
+        if (this.getWorld().getDifficulty() == Difficulty.PEACEFUL && this.getWorld().getGameRules().getBoolean(GameRules.NATURAL_REGENERATION)) {
             PlayerEntity player = (PlayerEntity) (Object) this;
             this.thirstManager.update(player);
 
@@ -91,7 +90,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements ThirstMa
         PlayerEntity player = (PlayerEntity) (Object) this;
 
         // Add more exhaustion in the player is in the nether and the option in active
-        if (ConfigRegistry.CONFIG.nether_drains_more_thirst && this.world.getRegistryKey() == World.NETHER) {
+        if (ConfigRegistry.CONFIG.nether_drains_more_thirst && this.getWorld().getRegistryKey() == World.NETHER) {
             exhaustion *= ConfigRegistry.CONFIG.nether_drains_more_thirst_value;
         }
 
