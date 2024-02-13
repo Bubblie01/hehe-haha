@@ -1,21 +1,53 @@
 package io.github.bnnuycorps.oasisbar;
 
+import io.github.bnnuycorps.oasisbar.Thirst.event.DehydrationEvent;
+import io.github.bnnuycorps.oasisbar.Thirst.event.HydrationTemplate;
+import io.github.bnnuycorps.oasisbar.Thirst.inits.*;
+import io.github.bnnuycorps.oasisbar.Thirst.packets.ThirstServerPacket;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.metadata.ModMetadata;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main implements ModInitializer {
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-    public static final Logger LOGGER = LoggerFactory.getLogger("template-mod");
+
 	public static final String MOD_ID = "oasisbar";
+	public static final Logger LOGGER = (Logger) LogManager.getLogger(MOD_ID);
+
+	public static final List<HydrationTemplate> HYDRATION_TEMPLATES = new ArrayList<HydrationTemplate>();
+
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
+
+		CommandInit.init();
+		CompatInit.init();
+		ConfigInit.init();
+		EffectInit.init();
+		ItemInit.init();
+		EventInit.init();
+		SoundInit.init();
+		TagInit.init();
+		ThirstServerPacket.init();
+		JsonReaderInit.init();
+
+		FabricLoader.getInstance().getEntrypointContainers("dehydration", DehydrationEvent.class).forEach((entrypoint) -> {
+			ModMetadata metadata = entrypoint.getProvider().getMetadata();
+			String id = metadata.getId();
+
+			try {
+				DehydrationEvent api = entrypoint.getEntrypoint();
+				api.registerDrinkEvent();
+			} catch (Throwable exception) {
+				LOGGER.error( "Mod {} is providing a broken implementation", id, exception);
+			}
+		});
 
 	}
 }

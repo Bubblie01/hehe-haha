@@ -1,5 +1,8 @@
 package io.github.bnnuycorps.oasisbar;
 
+import io.github.bnnuycorps.oasisbar.Thirst.inits.ModelProviderInit;
+import io.github.bnnuycorps.oasisbar.Thirst.inits.RenderInit;
+import io.github.bnnuycorps.oasisbar.Thirst.packets.ThirstClientPacket;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
@@ -28,5 +31,8 @@ public class ClientInitializer implements ClientModInitializer {
 			}
 			client.getProfiler().pop();
 		});
+
+		ModelProviderInit.init();
+		ThirstClientPacket.init();
 	}
 }
