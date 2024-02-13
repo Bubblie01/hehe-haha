@@ -1,13 +1,19 @@
 package io.github.bnnuycorps.oasisbar.thirst;
 
 import io.github.bnnuycorps.oasisbar.thirst.registry.ConfigRegistry;
+import io.github.bnnuycorps.oasisbar.thirst.registry.DamageSourceRegistry;
 import io.github.bnnuycorps.oasisbar.thirst.registry.SoundRegistry;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.world.Difficulty;
+
+import static io.github.bnnuycorps.oasisbar.thirst.registry.DamageSourceRegistry.DEHYDRATION;
 
 public class ThirstManager {
     public boolean isModEnabled = true;
@@ -47,7 +53,7 @@ public class ThirstManager {
             ++this.dehydrationTickTimer;
             if (this.dehydrationTickTimer >= 80) {
                 if (player.getHealth() > 10.0F || difficulty == Difficulty.HARD || (player.getHealth() > 1.0F && difficulty == Difficulty.NORMAL)) {
-                    player.damage(DamageSourceRegistry.THIRST, 1.0f);
+                    player.damage(new DamageSource((RegistryEntry<DamageType>) DEHYDRATION), 1.0f);
                 }
                 this.dehydrationTickTimer = 0;
             }

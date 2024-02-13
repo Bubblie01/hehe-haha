@@ -4,20 +4,15 @@
 	"compatibilityLevel": "JAVA_17",
 	"plugin": "io.github.bnnuycorps.oasisbar.mixin.MixinPlugin",
 	"mixins": [
-		"PlayerEntityMixin",
-		"PotionItemMixin",
-		"ServerPlayerEntityMixin",
-		"MilkBucketItemMixin",
-		"ItemMixin",
-		"PotionUtilMixin",
-		"StatusEffectMixin",
-		"PlayerManagerMixin",
-		"TooltipComponentMixin",
 		"HoneyBottleItemMixin",
-		"GlassBottleItemMixin",
-		"SprintPlayerEntityMixin",
-		"ClientPlayerEntityMixin",
-      "client.InGameHudMixin"
+		"HungerManagerMixin",
+		"ItemMixin",
+		"LeveledCauldronBlockMixin",
+		"MilkBucketItemMixin",
+		"PlayerEntityMixin",
+		"PlayerManagerMixin",
+		"PotionItemMixin",
+		"ServerPlayerEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
