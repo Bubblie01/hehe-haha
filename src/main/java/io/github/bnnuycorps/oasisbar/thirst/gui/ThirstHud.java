@@ -1,4 +1,4 @@
-package io.github.bnnuycorps.oasisbar.gui;
+package io.github.bnnuycorps.oasisbar.thirst.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.bnnuycorps.oasisbar.thirst.ThirstManager;
