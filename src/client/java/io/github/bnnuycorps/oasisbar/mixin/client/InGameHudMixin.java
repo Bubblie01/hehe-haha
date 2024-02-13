@@ -1,7 +1,6 @@
 package io.github.bnnuycorps.oasisbar.mixin.client;
 
-import io.github.bnnuycorps.oasisbar.Thirst.ThirstHudRender;
-import io.github.bnnuycorps.oasisbar.Thirst.interfaces.GUI;
+import io.github.bnnuycorps.oasisbar.thirst.interfaces.GUI;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

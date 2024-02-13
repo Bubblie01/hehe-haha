@@ -1,8 +1,8 @@
 package io.github.bnnuycorps.oasisbar.mixin;
 
 import com.mojang.authlib.GameProfile;
-import io.github.bnnuycorps.oasisbar.Thirst.ThirstManager;
-import io.github.bnnuycorps.oasisbar.Thirst.interfaces.ThirstManagerInt;
+import io.github.bnnuycorps.oasisbar.thirst.ThirstManager;
+import io.github.bnnuycorps.oasisbar.thirst.access.ThirstManagerAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -15,18 +15,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
 @Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
+public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
 
+    // Constructor
     public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) {
         super(world, profile);
     }
 
-    @Inject(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;setSprinting(Z)V", shift = At.Shift.AFTER))
-    public void tickMovementMixin(CallbackInfo info) {
-        ThirstManager thirstManager = ((ThirstManagerInt) this).getThirstManager();
-        if (thirstManager.hasThirst() && !this.isCreative() && thirstManager.getThirstLevel() < 6) {
-            this.setSprinting(false);
-        }
-    }
 
+    // Disable sprint if player has 6 thirst level or lower
+    @Inject(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;setSprinting(Z)V", shift = At.Shift.AFTER))
+    public void vanillaThirst$setSprintToFalse(CallbackInfo info) {
+        ThirstManager thirstManager = ((ThirstManagerAccess) this).getThirstManager();
+        if (thirstManager.isModEnabled() && !this.isCreative() && thirstManager.getThirstLevel() < 6)
+            this.setSprinting(false);
+    }
 }
