@@ -24,28 +24,22 @@ public abstract class PlayerEntityMixin extends Entity implements SprintManager 
 
 
     @Inject(method = "Lnet/minecraft/entity/player/PlayerEntity;tickMovement()V", at = @At("TAIL"))
-
     private void sprintModifier(CallbackInfo ci) {
         tickCounter++;
-        if(this.isSprinting() && (oasisbar$sprintLevel > 0)) {
+        if (this.isSprinting() && (oasisbar$sprintLevel > 0)) {
             oasisbar$sprintLevel -= 0.1;
 
-        }
-        else if(oasisbar$sprintLevel < 18.0f) {
-                if(oasisbar$sprintLevel < 0) {
-                    if (this.isSprinting()) {
-                        this.setSprinting(false);
-                        if (tickCounter % 20 == 0) {
-                            tickCounter = 0;
-                            this.setSprinting(true);
-                            oasisbar$sprintLevel += 0.1;
-                        }
-                    }
-                }
-                else {
+        } else if (oasisbar$sprintLevel < 18.0f) {
+            if (oasisbar$sprintLevel < 0) {
+                if (tickCounter % 40 == 0) {
+                    tickCounter = 0;
                     oasisbar$sprintLevel += 0.1;
                 }
+            } else {
+                oasisbar$sprintLevel += 0.1;
+            }
         }
+
     }
 
     @Override
