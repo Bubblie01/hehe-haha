@@ -3,7 +3,6 @@
 	"package": "io.github.bnnuycorps.oasisbar.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"InGameHudMixin",
 		"ClientPlayerEntityMixin"
 	],
 	"injectors": {

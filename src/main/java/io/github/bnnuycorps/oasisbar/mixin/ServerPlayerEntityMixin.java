@@ -88,10 +88,13 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
 
 
     // Set the thirst sync to -1
+    /*
     @Inject(method = "teleport", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;setWorld(Lnet/minecraft/server/world/ServerWorld;)V"))
     void vanillaThirst$teleportFix(ServerWorld targetWorld, double x, double y, double z, float yaw, float pitch, CallbackInfo cir) {
         this.syncedThirstLevel = -1;
     }
+
+     */
 
 
     // Set the thirst sync to -1

@@ -1,4 +1,4 @@
-package io.github.bnnuycorps.oasisbar.thirst.network.packet;
+package io.github.bnnuycorps.oasisbar;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;

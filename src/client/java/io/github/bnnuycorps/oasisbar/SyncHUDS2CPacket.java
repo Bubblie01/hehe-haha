@@ -1,4 +1,4 @@
-package io.github.bnnuycorps.oasisbar.thirst.network.packet;
+package io.github.bnnuycorps.oasisbar;
 
 import io.github.bnnuycorps.oasisbar.thirst.ThirstManager;
 import io.github.bnnuycorps.oasisbar.thirst.access.ThirstManagerAccess;

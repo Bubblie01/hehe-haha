@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 public class Main implements ModInitializer {
 
 	public static final String MOD_ID = "oasisbar";
-	public static final Logger LOGGER = (Logger) LogManager.getLogger(MOD_ID);
+//	public static final Logger LOGGER = (Logger) LogManager.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {

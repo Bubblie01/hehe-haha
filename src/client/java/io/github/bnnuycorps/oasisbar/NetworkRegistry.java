@@ -1,9 +1,6 @@
 package io.github.bnnuycorps.oasisbar;
 
 import io.github.bnnuycorps.oasisbar.thirst.identifier.NetworkPacketsIdentifiers;
-import io.github.bnnuycorps.oasisbar.thirst.network.packet.SwingHandS2CPacket;
-import io.github.bnnuycorps.oasisbar.thirst.network.packet.SyncHUDS2CPacket;
-import io.github.bnnuycorps.oasisbar.thirst.network.packet.SyncThirstS2CPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 

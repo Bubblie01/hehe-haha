@@ -33,14 +33,10 @@ public abstract class SprintPlayerEntityMixin extends Entity implements SprintMa
         }
         else if(oasisbar$sprintLevel < 18.0f) {
                 if(oasisbar$sprintLevel < 0) {
-                    if (this.isSprinting()) {
-                        this.setSprinting(false);
-                        if (tickCounter % 20 == 0) {
+                        if (tickCounter % 40 == 0) {
                             tickCounter = 0;
-                            this.setSprinting(true);
                             oasisbar$sprintLevel += 0.1;
                         }
-                    }
                 }
                 else {
                     oasisbar$sprintLevel += 0.1;
